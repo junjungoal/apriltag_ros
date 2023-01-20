@@ -53,15 +53,18 @@ void ContinuousDetector::onInit ()
 
   int queue_size;
   pnh.param<int>("queue_size", queue_size, 1);
+
+  std::string topic_prefix;
+  pnh.param<std::string>("topic_prefix", topic_prefix, "");
   camera_image_subscriber_ =
       it_->subscribeCamera("image_rect", queue_size,
                           &ContinuousDetector::imageCallback, this,
                           image_transport::TransportHints(transport_hint));
   tag_detections_publisher_ =
-      nh.advertise<AprilTagDetectionArray>("tag_detections", 1);
+      nh.advertise<AprilTagDetectionArray>(topic_prefix+"tag_detections", 1);
   if (draw_tag_detections_image_)
   {
-    tag_detections_image_publisher_ = it_->advertise("tag_detections_image", 1);
+    tag_detections_image_publisher_ = it_->advertise(topic_prefix+"tag_detections_image", 1);
   }
 }
 
