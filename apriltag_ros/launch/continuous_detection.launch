@@ -3,7 +3,7 @@
   <arg name="launch_prefix" default="" />
 
   <!-- configure camera input -->
-  <arg name="camera_name" default="/camera_rect" />
+  <arg name="camera_name" default="/top_camera/color" />
   <arg name="image_topic" default="image_rect" />
   <arg name="queue_size" default="1" />
 
@@ -15,6 +15,7 @@
 
     <param name="publish_tag_detections_image" type="bool" value="true" /><!-- default: false -->
     <param name="queue_size" type="int" value="$(arg queue_size)" />
+    <param name='topic_prefix' value='top_camera/' />
 
     <!-- load parameters (incl. tag family, tags, etc.) -->
     <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml"/>
